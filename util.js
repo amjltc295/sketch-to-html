@@ -57,10 +57,10 @@ var util = {
      * @returns {*}
      */
     isSqu: function (layer) {
-        if (layer.path.points.length !== 4) {
+        if (layer.points.length !== 4) {
             return false;
         }
-        const rectPoints = layer.path.points.map(x => this.toPoint(x.point, layer));
+        const rectPoints = layer.points.map(x => this.toPoint(x.point, layer));
         const isSquare = this.isSquare(rectPoints[0], rectPoints[1], rectPoints[2], rectPoints[3]);
         return isSquare;
     },
@@ -70,11 +70,11 @@ var util = {
      * @returns {boolean}
      */
     isCircle: function (layer) {
-        if (!layer.path.points || layer.path.points.length !== 4) {
+        if (!layer.points || layer.points.length !== 4) {
             return false;
         }
         const isSquare = this.isSqu( layer);
-        const hasCurveTo = layer.path.points.filter(x => x.hasCurveTo === true).length === 4;
+        const hasCurveTo = layer.points.filter(x => x.hasCurveTo === true).length === 4;
         if (isSquare && hasCurveTo) {
             return true;
         }
@@ -86,7 +86,7 @@ var util = {
      * @returns {*}
      */
     isRect(layer) {
-        const path = layer.path;
+        const path = layer;
         if (path.points.length !== 4) {
             return false;
         }
